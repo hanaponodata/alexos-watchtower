@@ -1,0 +1,53 @@
+{
+  "summary": {
+    "total": 7,
+    "passed": 0,
+    "failed": 6,
+    "skipped": 1,
+    "duration": 7.188134
+  },
+  "results": [
+    {
+      "test": "Application Startup",
+      "status": "FAIL",
+      "details": "HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /api/health (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1061d3e00>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+      "timestamp": "2025-06-26T18:36:50.189920"
+    },
+    {
+      "test": "Watchtower Functionality",
+      "status": "FAIL",
+      "details": "HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /api/watchtower/containers (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1069816d0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+      "timestamp": "2025-06-26T18:36:51.194162"
+    },
+    {
+      "test": "ChainBot Agent Integration",
+      "status": "FAIL",
+      "details": "HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /api/chainbot/status (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1069820d0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+      "timestamp": "2025-06-26T18:36:52.197674"
+    },
+    {
+      "test": "Dashboard Integration",
+      "status": "FAIL",
+      "details": "HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /dashboard/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x106946780>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+      "timestamp": "2025-06-26T18:36:53.200573"
+    },
+    {
+      "test": "API Integration",
+      "status": "FAIL",
+      "details": "HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /api/agents (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x106946fd0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+      "timestamp": "2025-06-26T18:36:54.204151"
+    },
+    {
+      "test": "WebSocket Connectivity",
+      "status": "SKIP",
+      "details": "WebSocket test simplified - endpoint exists",
+      "timestamp": "2025-06-26T18:36:55.367328"
+    },
+    {
+      "test": "Workflow Execution",
+      "status": "FAIL",
+      "details": "HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /api/chainbot/workflows (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1078c9130>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+      "timestamp": "2025-06-26T18:36:56.371549"
+    }
+  ]
+}

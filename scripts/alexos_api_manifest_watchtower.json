@@ -1,0 +1,41 @@
+{
+  "module": "watchtower",
+  "version": "1.0.0",
+  "endpoints": [
+    {
+      "path": "/api/agents",
+      "methods": ["GET", "POST", "PUT", "DELETE"],
+      "rbac": true
+    },
+    {
+      "path": "/api/events",
+      "methods": ["GET", "POST"],
+      "rbac": true
+    },
+    {
+      "path": "/api/status",
+      "methods": ["GET"],
+      "rbac": false
+    },
+    {
+      "path": "/dashboard/api/agents",
+      "methods": ["GET"],
+      "rbac": true
+    },
+    {
+      "path": "/dashboard/api/events",
+      "methods": ["GET"],
+      "rbac": true
+    },
+    {
+      "path": "/dashboard/api/status",
+      "methods": ["GET"],
+      "rbac": false
+    },
+    {
+      "path": "/dashboard/ws",
+      "methods": ["WS"],
+      "rbac": true
+    }
+  ]
+} 

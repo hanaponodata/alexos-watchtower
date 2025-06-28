@@ -1,0 +1,19 @@
+[Unit]
+Description=Watchtower Enterprise Backend
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=simple
+User=alex
+Group=alex
+WorkingDirectory=/opt/alexos/watchtower
+Environment=PATH=/opt/alexos/watchtower/venv/bin
+ExecStart=/opt/alexos/watchtower/venv/bin/python main.py
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target 

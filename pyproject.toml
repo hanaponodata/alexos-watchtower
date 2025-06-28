@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "watchtower"
+version = "1.0.0"
+description = "Enterprise-grade agentic, sovereign, extensible OS and protocol"
+authors = ["Alex Therien <alex@hanaponodata.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = "*"
+uvicorn = "*"
+sqlalchemy = "*"
+psutil = "*"
+python-dotenv = "*"
+pydantic = "*"
+requests = "*"
+python-json-logger = "*"
+gitpython = "*"
+kafka-python = "*"
+paho-mqtt = "*"
+pyzmq = "*"
+redis = "*"
+web3 = "*"
+solana = "*"
+substrate-interface = "*"
+hvac = "*"
+textblob = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

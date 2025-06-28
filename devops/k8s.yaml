@@ -1,0 +1,104 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: watchtower
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: watchtower
+  template:
+    metadata:
+      labels:
+        app: watchtower
+    spec:
+      containers:
+        - name: watchtower
+          image: watchtower:latest
+          imagePullPolicy: Never
+          env:
+            - name: WATCHTOWER_ENV
+              value: "production"
+            - name: WATCHTOWER_DB_URL
+              valueFrom:
+                secretKeyRef:
+                  name: watchtower-secrets
+                  key: db-url
+          ports:
+            - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: watchtower
+spec:
+  selector:
+    app: watchtower
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: db-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: watchtower-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: watchtower-db
+  template:
+    metadata:
+      labels:
+        app: watchtower-db
+    spec:
+      containers:
+        - name: db
+          image: postgres:15
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: watchtower-secrets
+                  key: db-user
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: watchtower-secrets
+                  key: db-password
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: watchtower-secrets
+                  key: db-name
+          volumeMounts:
+            - name: db-storage
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: db-storage
+          persistentVolumeClaim:
+            claimName: db-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: watchtower-db
+spec:
+  selector:
+    app: watchtower-db
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432

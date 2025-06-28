@@ -1,0 +1,47 @@
+version: "3.9"
+
+services:
+  watchtower:
+    build:
+      context: ..
+      dockerfile: devops/Dockerfile
+    container_name: watchtower
+    environment:
+      - WATCHTOWER_ENV=${WATCHTOWER_ENV}
+      - WATCHTOWER_DB_URL=${WATCHTOWER_DB_URL}
+    volumes:
+      - ../:/app
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db-main
+
+  db-main:
+    image: postgres:15
+    container_name: db-main
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_main_data:/var/lib/postgresql/data
+
+  db-test:
+    image: postgres:15
+    container_name: db-test
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_TEST_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_TEST_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_TEST_DB}
+    ports:
+      - "5433:5432"
+    volumes:
+      - db_test_data:/var/lib/postgresql/data
+
+volumes:
+  db_main_data:
+  db_test_data:

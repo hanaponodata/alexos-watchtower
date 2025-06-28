@@ -1,0 +1,38 @@
+# Watchtower module registration for ALEX OS
+module:
+  name: watchtower
+  description: Enterprise agent/event monitoring, audit, compliance, extensibility
+  version: 1.0.0
+  enabled: true
+  service:
+    type: systemd
+    unit: watchtower.service
+    working_dir: /opt/alexos/watchtower
+    env_file: /opt/alexos/watchtower/.env
+  endpoints:
+    - path: /api/agents
+      type: REST
+      rbac: true
+    - path: /api/events
+      type: REST
+      rbac: true
+    - path: /api/status
+      type: REST
+      rbac: false
+    - path: /dashboard/api/*
+      type: REST
+      rbac: true
+    - path: /dashboard/ws
+      type: websocket
+      rbac: true
+  health:
+    url: /api/status
+    interval: 30s
+    alert_on: [unhealthy, degraded]
+  config:
+    - .env
+    - docker-compose.yml
+    - watchtower.service
+  docs:
+    - README.md
+    - OpenAPI/Swagger 
