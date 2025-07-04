@@ -9,6 +9,7 @@ import os
 import tempfile
 import yaml
 from pathlib import Path
+import pytest
 
 # Add the integration directory to the path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -44,6 +45,7 @@ class MockLedger:
         })
 
 
+@pytest.mark.asyncio
 async def test_watchtower_agent():
     """Test Watchtower agent creation and basic functionality"""
     print("Testing Watchtower agent...")
@@ -112,6 +114,7 @@ async def test_watchtower_agent():
     print("✓ Watchtower agent tests passed")
 
 
+@pytest.mark.asyncio
 async def test_watchtower_config():
     """Test Watchtower configuration management"""
     print("\nTesting Watchtower configuration...")
@@ -174,6 +177,7 @@ async def test_watchtower_config():
     print("✓ Watchtower configuration tests passed")
 
 
+@pytest.mark.asyncio
 async def test_api_integration():
     """Test API integration components"""
     print("\nTesting API integration...")
@@ -213,6 +217,7 @@ async def test_api_integration():
     print("✓ API integration tests passed")
 
 
+@pytest.mark.asyncio
 async def test_web_dashboard():
     """Test web dashboard template"""
     print("\nTesting web dashboard...")
@@ -237,6 +242,7 @@ async def test_web_dashboard():
     print("✓ Web dashboard tests passed")
 
 
+@pytest.mark.asyncio
 async def test_deployment_scripts():
     """Test deployment script availability"""
     print("\nTesting deployment scripts...")
